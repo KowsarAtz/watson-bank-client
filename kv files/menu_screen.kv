@@ -1,0 +1,21 @@
+#:import utils kivy.utils
+<MenuScreen>:
+    canvas:
+        Color:
+            rgb: utils.get_color_from_hex("#0c1632") 
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    
+    orientation: 'vertical'
+    spacing: '10'
+    padding: [0,240,0,240]
+
+    Button:
+        # background_normal: ''
+        # border: 30,30,30,30
+        # background_color: utils.get_color_from_hex("#0c2876") 
+        text: 'LOGOUT'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+        on_release: root.logoutCallback()

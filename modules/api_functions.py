@@ -2,8 +2,6 @@ import requests
 
 BASE_URL = 'http://localhost:8000/api/'
 # BASE_URL = 'http://176.9.164.222:2211/api/'
-TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MDkwMTg2MCwiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.vDAz9t6wixMjuZKagEaSDCosZ5VZ-Mo9eziPf9LCyes'
-
 BLOCKED = 'B'
 OPEN = 'O'
 CLOSED = 'C'
