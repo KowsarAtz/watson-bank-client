@@ -1,6 +1,7 @@
 from kivy.uix.boxlayout import BoxLayout
 from constants import MENU_SCREEN
 from utility_functions import storeToken 
+from Alert import Alert
 
 class LoginScreen(BoxLayout):
     def __init__(self, app, **kwargs):
@@ -14,8 +15,9 @@ class LoginScreen(BoxLayout):
         try:
             tokenStored = storeToken(self.usernameTextInput.text.strip(), self.passwordTextInput.text.strip())
         except:
-            pass #to be completed . . .
+            Alert(title="Connection Error", text='Connection Error, Try Again Later')
+            return
         if tokenStored:
             self.app.screenManager.current = MENU_SCREEN
             return
-        #to be completed . . .
+        Alert(title="Auhthentication Error", text='Invalid Username or Password, Try Again')

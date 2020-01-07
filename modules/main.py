@@ -7,12 +7,13 @@ from utility_functions import readToken
 from constants import *
 from LoginScreen import LoginScreen
 from MenuScreen import MenuScreen
-# Window.clearcolor = utils.get_color_from_hex("#0c1632")
+from SignUpScreen import SignUpScreen
+
 Config.set('graphics', 'resizable', FALSE)
-# Config.set('graphics', 'width', '300')
-# Config.set('graphics', 'height', '300')
+
 root = Builder.load_file(LOGIN_SCREEN_KV)
 root = Builder.load_file(MENU_SCREEN_KV)
+root = Builder.load_file(SIGNUP_SCREEN_KV)
 
 
 class MyApp(App):
@@ -33,6 +34,11 @@ class MyApp(App):
         else:
             self.screenManager.add_widget(screenLogin)
             self.screenManager.add_widget(screenMenu)
+
+        self.signupScreen = SignUpScreen(self)
+        screen = Screen(name=SIGNUP_SCREEN)
+        screen.add_widget(self.signupScreen)
+        self.screenManager.add_widget(screen)
 
         return self.screenManager
 

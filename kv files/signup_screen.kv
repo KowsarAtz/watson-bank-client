@@ -1,0 +1,34 @@
+#:import utils kivy.utils
+<SignUpScreen>:
+    canvas:
+        Color:
+            rgb: utils.get_color_from_hex("#0c1632") 
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    orientation: 'vertical'
+    spacing: '10'
+    padding: [0,220,0,220]
+    TextInput:
+        id: chosenUsernameTextInput
+        multiline: False
+        hint_text: 'Username'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+    TextInput:
+        id: chosenPasswordTextInput
+        multiline: False
+        password: True
+        hint_text: 'Password'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+    Button:
+        text: 'REGISTER'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+        on_release: root.signUpCallback()
+    Button:
+        text: 'CANCEL'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+        on_release: root.cancelSignUpCallback()
