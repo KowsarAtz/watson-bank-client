@@ -26,8 +26,17 @@ class TransactionsListScreen(BoxLayout):
         rvData = []
         index = 0
         for item in self.allResults:  
-            if not item['fromAccountNumber'] == None and not searchText in item['fromAccountNumber'] and \
-                not item['toAccountNumber'] == None and not searchText in item['toAccountNumber'] and \
+            
+            if item['fromAccountNumber'] == None:
+                if not searchText in item['toAccountNumber'] and \
+                    not searchText in str(item['id']):
+                    continue
+            elif item['toAccountNumber'] == None:
+                if not searchText in item['fromAccountNumber'] and \
+                    not searchText in str(item['id']):
+                    continue
+            elif not searchText in item['fromAccountNumber'] and \
+                    not searchText in item['toAccountNumber'] and \
                     not searchText in str(item['id']):
                     continue
             fromAccountNumber = '-'
