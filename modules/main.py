@@ -8,16 +8,20 @@ from constants import *
 from LoginScreen import LoginScreen
 from MenuScreen import MenuScreen
 from SignUpScreen import SignUpScreen
+from AccountsListScreen import AccountsListScreen
 
 Config.set('graphics', 'resizable', FALSE)
+Window.size = (600, 600)
 
 root = Builder.load_file(LOGIN_SCREEN_KV)
 root = Builder.load_file(MENU_SCREEN_KV)
 root = Builder.load_file(SIGNUP_SCREEN_KV)
+root = Builder.load_file(ALL_ACCOUNTS_SCREEN_KV)
 
 
 class MyApp(App):
     def build(self):
+        self.title = 'Watson Bank Client'
         self.screenManager = ScreenManager()
 
         self.loginScreen = LoginScreen(self)
@@ -38,6 +42,11 @@ class MyApp(App):
         self.signupScreen = SignUpScreen(self)
         screen = Screen(name=SIGNUP_SCREEN)
         screen.add_widget(self.signupScreen)
+        self.screenManager.add_widget(screen)
+
+        self.allAccountsScreen = AccountsListScreen(self)
+        screen = Screen(name=ALL_ACCOUNTS_SCREEN)
+        screen.add_widget(self.allAccountsScreen)
         self.screenManager.add_widget(screen)
 
         return self.screenManager

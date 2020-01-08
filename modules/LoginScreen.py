@@ -11,6 +11,9 @@ class LoginScreen(BoxLayout):
         self.passwordTextInput = self.ids.passwordTextInput
 
     def loginCallback(self):
+        if len(self.usernameTextInput.text.strip()) == 0 or len(self.passwordTextInput.text.strip()) == 0:
+            Alert(title="Input Error", text='Empty Fields are not Allowed Here! Try Again')
+            return
         tokenStored = False
         try:
             tokenStored = storeToken(self.usernameTextInput.text.strip(), self.passwordTextInput.text.strip())

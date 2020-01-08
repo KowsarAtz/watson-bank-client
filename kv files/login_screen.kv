@@ -8,15 +8,18 @@
             pos: self.pos
     orientation: 'vertical'
     spacing: '10'
-    padding: [0,240,0,240]
+    BoxLayout:
+        size_hint: (1,7)
     TextInput:
         id: usernameTextInput
+        write_tab: False
         multiline: False
         hint_text: 'Username'
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
     TextInput:
         id: passwordTextInput
+        write_tab: False
         multiline: False
         password: True
         hint_text: 'Password'
@@ -27,3 +30,5 @@
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.loginCallback()
+    BoxLayout:
+        size_hint: (1,7)

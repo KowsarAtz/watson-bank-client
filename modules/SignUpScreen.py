@@ -12,6 +12,9 @@ class SignUpScreen(BoxLayout):
         self.passwordTextInput = self.ids.chosenPasswordTextInput
 
     def signUpCallback(self):
+        if len(self.usernameTextInput.text.strip()) == 0 or len(self.passwordTextInput.text.strip()) == 0:
+            Alert(title="Input Error", text='Empty Fields are not Allowed Here! Try Again')
+            return
         try:
             resultCode = signUp(readToken(), 
                             self.usernameTextInput.text.strip(), 

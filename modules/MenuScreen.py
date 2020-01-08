@@ -8,11 +8,11 @@ class MenuScreen(BoxLayout):
         self.app = app
 
     def logoutCallback(self):
-        tokenRemoved=removeToken()
-        if tokenRemoved:
-            self.app.screenManager.current = LOGIN_SCREEN
-        else:
-            pass  # to be completed . . . (not sure what exactly!)
-
+        removeToken()
+        self.app.screenManager.current = LOGIN_SCREEN
+        
     def signUpClerkCallback(self):
         self.app.screenManager.current = SIGNUP_SCREEN
+
+    def getAllAccountsCallback(self):
+        self.app.screenManager.current = ALL_ACCOUNTS_SCREEN

@@ -1,0 +1,98 @@
+#:import utils kivy.utils
+
+<Row@BoxLayout>:
+    accountNumber: ''
+    ownerName: ''
+    ownerID: ''
+    credit: ''
+    status: ''
+
+    canvas.before:
+        Color:
+            rgba: utils.get_color_from_hex("#15234c") 
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    BoxLayout:
+        spacing: dp(1)
+        orientation: 'horizontal'
+
+        Label:
+            text: root.accountNumber
+            size_hint: (1.5,1)
+
+        Label:
+            text: root.ownerName
+            size_hint: (1.5,1)
+        
+        Label:
+            text: root.ownerID
+            size_hint: (1,1)
+        
+        Label:
+            text: root.credit
+            size_hint: (0.5,1)
+
+        Label:
+            text: root.status
+            size_hint: (0.5,1)
+
+<AccountsListScreen>:
+    canvas:
+        Color:
+            rgba: utils.get_color_from_hex("#0c1632") 
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    orientation: 'vertical'
+
+    BoxLayout:
+        spacing: dp(1)
+        orientation: 'horizontal'
+        size_hint: (1, 0.11)
+        padding: [10,20,10,0]
+        TextInput:
+            hint_text: 'Search for Account Number, Owner Name or Owner ID . . .'
+            on_text: root.searchCallback(self.text)
+
+    BoxLayout:
+        spacing: dp(1)
+        orientation: 'horizontal'
+        size_hint: (1, 0.1)
+        padding: [20,0,30,0]
+
+        Label:
+            text: 'Account Number'
+            size_hint: (1.5,1)
+
+        Label:
+            text: 'Owner Name'
+            size_hint: (1.5,1)
+        
+        Label:
+            text: 'Owner ID'
+            size_hint: (1,1)
+        
+        Label:
+            text: 'Credit'
+            size_hint: (0.5,1)
+
+        Label:
+            text: 'Status'
+            size_hint: (0.5,1)
+
+    RecycleView:
+        id: rv
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+        bar_width: dp(10)
+        viewclass: 'Row'
+        RecycleBoxLayout:
+            padding: [20,0,30,20]
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(4)

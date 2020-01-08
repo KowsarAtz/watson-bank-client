@@ -9,7 +9,9 @@
     
     orientation: 'vertical'
     spacing: '10'
-    padding: [0,240,0,240]
+
+    BoxLayout:
+        size_hint: (1,7)
 
     Button:
         # background_normal: ''
@@ -21,10 +23,16 @@
         on_release: root.signUpClerkCallback()
 
     Button:
-        # background_normal: ''
-        # border: 30,30,30,30
-        # background_color: utils.get_color_from_hex("#0c2876") 
+        text: 'ACCOUNTS LIST'
+        size_hint: (0.3, 1)
+        pos_hint: {"center_x":0.5}
+        on_release: root.getAllAccountsCallback()
+
+    Button:
         text: 'LOGOUT'
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.logoutCallback()
+        
+    BoxLayout:
+        size_hint: (1,7)

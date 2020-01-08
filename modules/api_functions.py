@@ -113,4 +113,5 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
         {"non_field_errors":["not enough credit"]}      
     '''
 
-# print(createTransaction(TOKEN, 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
+# print(createTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE1ODE5NDY5MjksImVtYWlsIjoiIn0.kI2e36eepYcYiZcEaMQ-LXHBXNcWxh51yiS2etfc3xI'
+#         , 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
