@@ -37,6 +37,7 @@ class MyApp(App):
         if not readToken() == None:
             self.screenManager.add_widget(screenMenu)
             self.screenManager.add_widget(screenLogin)
+            self.afterLoginCallback()
         else:
             self.screenManager.add_widget(screenLogin)
             self.screenManager.add_widget(screenMenu)
@@ -46,6 +47,9 @@ class MyApp(App):
         screen.add_widget(self.signupScreen)
         self.screenManager.add_widget(screen)
 
+        return self.screenManager
+    
+    def afterLoginCallback(self):
         self.allAccountsScreen = AccountsListScreen(self)
         screen = Screen(name=ALL_ACCOUNTS_SCREEN)
         screen.add_widget(self.allAccountsScreen)
@@ -55,8 +59,6 @@ class MyApp(App):
         screen = Screen(name=ALL_TRANSACTIONS_SCREEN)
         screen.add_widget(self.allTransactionsScreen)
         self.screenManager.add_widget(screen)
-
-        return self.screenManager
 
 if __name__ == '__main__':
     MyApp().run()
