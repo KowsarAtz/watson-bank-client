@@ -13,29 +13,13 @@ class AccountsListScreen(BoxLayout):
         self.app = app
         self.ids.rv.data = []
         result = getAllAccounts(readToken())
-        self.allResults = result[:]
+        self.allResults = []
         if result == None:
             removeToken()
             self.app.screenManager.current = LOGIN_SCREEN
             Alert(title="Authentication Error", text='Please Login Again')
         else:
-            rvData = []
-            for item in result:
-                status = item['status']
-                if status == BLOCKED:
-                    status = 'blocked'
-                elif status == CLOSED:
-                    status = 'closed'
-                elif status == OPEN:
-                    status = 'open'
-                rvData += [{
-                    'accountNumber': item['accountNumber'],
-                    'ownerName': item['accountOwner']['firstName']+' '+item['accountOwner']['lastName'],
-                    'ownerID': item['accountOwner']['nationalCode'],
-                    'credit': str(item['credit']),
-                    'status': status
-                }]
-            self.ids.rv.data = rvData
+            self.allResults = result[:]
 
     def searchCallback(self, text):
         searchText = text.strip().lower()
@@ -63,3 +47,6 @@ class AccountsListScreen(BoxLayout):
                 'status': status
             }]
         self.ids.rv.data = rvData
+
+    def backToMenuCallback(self):
+        self.app.screenManager.current = MENU_SCREEN

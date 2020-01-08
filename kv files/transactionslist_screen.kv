@@ -1,11 +1,13 @@
 #:import utils kivy.utils
 
-<Row@BoxLayout>:
-    accountNumber: ''
-    ownerName: ''
-    ownerID: ''
-    credit: ''
-    status: ''
+<TransactionRow@BoxLayout>:
+    index: ''
+    transactionID: ''
+    fromAccountNumber: ''
+    toAccountNumber: ''
+    amount: ''
+    type: ''
+    describtion: ''
 
     canvas.before:
         Color:
@@ -19,26 +21,31 @@
         orientation: 'horizontal'
 
         Label:
-            text: root.accountNumber
-            size_hint: (1.5,1)
-
-        Label:
-            text: root.ownerName
-            size_hint: (1.5,1)
-        
-        Label:
-            text: root.ownerID
+            text: root.transactionID
             size_hint: (1,1)
+
+        Label:
+            text: root.amount
+            size_hint: (1,1)
+
+        Label:
+            text: root.type
+            size_hint: (0.5,1)
         
         Label:
-            text: root.credit
-            size_hint: (0.5,1)
-
+            text: root.fromAccountNumber
+            size_hint: (2,1)
+        
         Label:
-            text: root.status
-            size_hint: (0.5,1)
+            text: root.toAccountNumber
+            size_hint: (2,1)
 
-<AccountsListScreen>:
+        BubbleButton:
+            text: 'Click'
+            on_release: root.parent.parent.parent.showDescribtionCallback(root.describtion)
+            size_hint: (1,1)
+
+<TransactionsListScreen>:
     canvas:
         Color:
             rgba: utils.get_color_from_hex("#0c1632") 
@@ -59,7 +66,7 @@
             on_release: root.backToMenuCallback()
 
         TextInput:
-            hint_text: 'Search for Account Number, Owner Name or Owner ID . . .'
+            hint_text: 'Search for Account Number or Transaction ID . . .'
             on_text: root.searchCallback(self.text)
             size_hint: (8,1)
 
@@ -70,31 +77,35 @@
         padding: [20,0,30,0]
 
         Label:
-            text: 'Account Number'
-            size_hint: (1.5,1)
-
-        Label:
-            text: 'Owner Name'
-            size_hint: (1.5,1)
-        
-        Label:
-            text: 'Owner ID'
+            text: 'Transaction ID'
             size_hint: (1,1)
-        
-        Label:
-            text: 'Credit'
-            size_hint: (0.5,1)
 
         Label:
-            text: 'Status'
+            text: 'Amount'
+            size_hint: (1,1)
+
+        Label:
+            text: 'Type'
             size_hint: (0.5,1)
+        
+        Label:
+            text: 'From Account'
+            size_hint: (2,1)
+        
+        Label:
+            text: 'To Account'
+            size_hint: (2,1)
+
+        Label:
+            text: 'Info'
+            size_hint: (1,1)
 
     RecycleView:
         id: rv
         scroll_type: ['bars', 'content']
         scroll_wheel_distance: dp(114)
         bar_width: dp(10)
-        viewclass: 'Row'
+        viewclass: 'TransactionRow'
         RecycleBoxLayout:
             padding: [20,0,30,20]
             default_size: None, dp(56)

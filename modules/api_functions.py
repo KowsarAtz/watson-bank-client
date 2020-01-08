@@ -115,3 +115,5 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
 
 # print(createTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE1ODE5NDY5MjksImVtYWlsIjoiIn0.kI2e36eepYcYiZcEaMQ-LXHBXNcWxh51yiS2etfc3xI'
 #         , 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
+
+# print(getAllTransactions('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MTk0NzE5MywiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.AdnrTqGuMldnAB9c-pVc29bld5jItQ2EMwVgQ4TGLAc'))

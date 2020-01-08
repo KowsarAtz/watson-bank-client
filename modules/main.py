@@ -9,6 +9,7 @@ from LoginScreen import LoginScreen
 from MenuScreen import MenuScreen
 from SignUpScreen import SignUpScreen
 from AccountsListScreen import AccountsListScreen
+from TransactionsListScreen import TransactionsListScreen
 
 Config.set('graphics', 'resizable', FALSE)
 Window.size = (600, 600)
@@ -17,6 +18,7 @@ root = Builder.load_file(LOGIN_SCREEN_KV)
 root = Builder.load_file(MENU_SCREEN_KV)
 root = Builder.load_file(SIGNUP_SCREEN_KV)
 root = Builder.load_file(ALL_ACCOUNTS_SCREEN_KV)
+root = Builder.load_file(ALL_TRANSACTIONS_SCREEN_KV)
 
 
 class MyApp(App):
@@ -47,6 +49,11 @@ class MyApp(App):
         self.allAccountsScreen = AccountsListScreen(self)
         screen = Screen(name=ALL_ACCOUNTS_SCREEN)
         screen.add_widget(self.allAccountsScreen)
+        self.screenManager.add_widget(screen)
+
+        self.allTransactionsScreen = TransactionsListScreen(self)
+        screen = Screen(name=ALL_TRANSACTIONS_SCREEN)
+        screen.add_widget(self.allTransactionsScreen)
         self.screenManager.add_widget(screen)
 
         return self.screenManager
