@@ -2,7 +2,7 @@
 <SignUpScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#0c1632") 
+            rgb: utils.get_color_from_hex("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -11,6 +11,7 @@
     BoxLayout:
         size_hint: (1,7)
     TextInput:
+        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
         id: chosenUsernameTextInput
         write_tab: False
         multiline: False
@@ -18,6 +19,7 @@
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
     TextInput:
+        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
         id: chosenPasswordTextInput
         write_tab: False
         multiline: False
@@ -26,12 +28,14 @@
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
     Button:
-        text: 'REGISTER'
+        markup: True
+        text: '[b]REGISTER[/b]'
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.signUpCallback()
     Button:
-        text: 'CANCEL'
+        markup: True
+        text: '[b]CANCEL[/b]'
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.cancelSignUpCallback()

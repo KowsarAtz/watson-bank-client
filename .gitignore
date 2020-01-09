@@ -5,6 +5,7 @@ test/
 *.py[cod]
 *$py.class
 token
+chart.png
 
 # C extensions
 *.so

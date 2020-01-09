@@ -6,12 +6,16 @@ MENU_SCREEN = 'menu'
 SIGNUP_SCREEN = 'signup'
 ALL_ACCOUNTS_SCREEN = 'all_accounts'
 ALL_TRANSACTIONS_SCREEN = 'all_transactions'
+LOGS_SCREEN = 'logs'
 
 LOGIN_SCREEN_KV = '../kv files/login_screen.kv'
 MENU_SCREEN_KV = '../kv files/menu_screen.kv'
 SIGNUP_SCREEN_KV = '../kv files/signup_screen.kv'
 ALL_ACCOUNTS_SCREEN_KV = '../kv files/accountslist_screen.kv'
 ALL_TRANSACTIONS_SCREEN_KV = '../kv files/transactionslist_screen.kv'
+LOGS_SCREEN_KV = '../kv files/logs_screen.kv'
+
+CHART_PATH = './chart.png'
 
 INVALID_TOKEN_CODE = 401
 INVALID_CODE = 400

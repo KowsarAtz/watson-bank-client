@@ -9,7 +9,7 @@
 
     canvas.before:
         Color:
-            rgba: utils.get_color_from_hex("#15234c") 
+            rgba: utils.get_color_from_hex("#383354") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -37,11 +37,21 @@
         Label:
             text: root.status
             size_hint: (0.5,1)
+        
+        BubbleButton:
+            text: '. . .'
+            on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber)
+            size_hint: (0.5,1)
+
+        BubbleButton:
+            text: '. . .'
+            # on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber)
+            size_hint: (0.5,1)
 
 <AccountsListScreen>:
     canvas:
         Color:
-            rgba: utils.get_color_from_hex("#0c1632") 
+            rgba: utils.get_color_from_hex("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -54,7 +64,8 @@
         padding: [10,20,10,0]
 
         BubbleButton:
-            text: 'Back to Menu'
+            markup: True
+            text: '[b][i]Back to Menu[/i][/b]'
             size_hint: (2,1)
             on_release: root.backToMenuCallback()
 
@@ -62,6 +73,7 @@
             hint_text: 'Search for Account Number, Owner Name or Owner ID . . .'
             on_text: root.searchCallback(self.text)
             size_hint: (8,1)
+            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
 
     BoxLayout:
         spacing: dp(1)
@@ -70,24 +82,41 @@
         padding: [20,0,30,0]
 
         Label:
-            text: 'Account Number'
+            markup: True
+            text: '[b]Account Number[/b]'
             size_hint: (1.5,1)
 
         Label:
-            text: 'Owner Name'
+            markup: True
+            text: '[b]Owner Name[/b]'
             size_hint: (1.5,1)
         
         Label:
-            text: 'Owner ID'
+            markup: True
+            text: '[b]Owner ID[/b]'
             size_hint: (1,1)
         
         Label:
-            text: 'Credit'
+            markup: True
+            text: '[b]Credit[/b]'
             size_hint: (0.5,1)
 
         Label:
-            text: 'Status'
+            markup: True
+            text: '[b]Status[/b]'
             size_hint: (0.5,1)
+
+        Label:
+            markup: True
+            text: '[b]View Logs[/b]'
+            size_hint: (0.5,1)
+            font_size: '14sp'
+        
+        Label:
+            markup: True
+            text: '[b]Create Transaction[/b]'
+            size_hint: (0.5,1)
+            font_size: '11sp'
 
     RecycleView:
         id: rv

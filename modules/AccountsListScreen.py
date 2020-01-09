@@ -1,8 +1,9 @@
 from random import sample
 from string import ascii_lowercase
 from kivy.uix.boxlayout import BoxLayout
-from api_functions import getAllAccounts, BLOCKED, OPEN, CLOSED
+from api_functions import getAllAccounts, getAccountLogs, BLOCKED, OPEN, CLOSED
 from utility_functions import readToken, removeToken
+from LogsScreen import createLogsChart
 from Alert import Alert
 from constants import *
 
@@ -50,3 +51,23 @@ class AccountsListScreen(BoxLayout):
 
     def backToMenuCallback(self):
         self.app.screenManager.current = MENU_SCREEN
+
+    def showLogsCallback(self, accountID):
+        logs = getAccountLogs(readToken(), int(accountID))
+        if logs == None:
+            removeToken()
+            self.app.screenManager.current = LOGIN_SCREEN
+            Alert(title="Authentication Error", text='Please Login Again')
+            return
+        currentCredit = logs['currentCredit']
+        logs = logs['logs']
+
+        if len(logs) == 0:
+            Alert(title="Account Logs", text='There are no logs to show!', time=3, linesNumber=1)
+            return
+
+        createLogsChart(logs, currentCredit)
+        self.app.loadLogScreenCallback()
+        self.app.logsScreenChild.ids.ChartImageId.reload()
+        self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: [i][b]' + accountID + '[/b][/i]'
+        self.app.screenManager.current = LOGS_SCREEN

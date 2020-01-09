@@ -98,7 +98,6 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
         'cash': cash
     }
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    print(response.text)
     if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
         return response.json()
     return None
@@ -113,7 +112,23 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
         {"non_field_errors":["not enough credit"]}      
     '''
 
+def getCashTransaction(token, amount, fromAccount, info = '', cash = False):
+    url = BASE_URL + 'transaction/TransactionListCreate'
+    data = {
+        'fromAccount': fromAccount,
+        'amount': amount,
+        'definition': info,
+        'cash': cash
+    }
+    response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
+    print(response.text)
+    if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
+        return response.json()
+    return None
+    # to be completed . . .
+
 # print(createTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE1ODE5NDY5MjksImVtYWlsIjoiIn0.kI2e36eepYcYiZcEaMQ-LXHBXNcWxh51yiS2etfc3xI'
 #         , 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
 
 # print(getAllTransactions('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MTk0NzE5MywiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.AdnrTqGuMldnAB9c-pVc29bld5jItQ2EMwVgQ4TGLAc'))
+print(getCashTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MjA0NDI3NCwiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.LB-3MAJYI9lVDUn4G4g6nM6x86g6ZS7xFaBkrcwhWOg', 10, '157712224022436000', cash=True))

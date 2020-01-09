@@ -2,7 +2,7 @@
 <MenuScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#0c1632") 
+            rgb: utils.get_color_from_hex("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -17,25 +17,35 @@
         # background_normal: ''
         # border: 30,30,30,30
         # background_color: utils.get_color_from_hex("#0c2876") 
-        text: 'REGISTER NEW CLERK'
+        text: '[b][i]Register New Clerk[/i][/b]'
+        markup: True
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.signUpClerkCallback()
 
     Button:
-        text: 'ACCOUNTS LIST'
+        # canvas.before:
+        #     Color:
+        #         rgb: utils.get_color_from_hex("#ffffff") 
+        #     Rectangle:
+        #         size: self.size
+        #         pos: self.pos
+        text: '[b][i]Accounts List[/i][/b]'
+        markup: True
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.getAllAccountsCallback()
 
     Button:
-        text: 'TRANSACTIONS LIST'
+        text: '[b][i]Transactions List[/i][/b]'
+        markup: True
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.getAllTransactionsCallback()
         
     Button:
-        text: 'LOGOUT'
+        text: '[b][i]Logout[/i][/b]'
+        markup: True
         size_hint: (0.3, 1)
         pos_hint: {"center_x":0.5}
         on_release: root.logoutCallback()
