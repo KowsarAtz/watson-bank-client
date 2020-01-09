@@ -71,3 +71,11 @@ class AccountsListScreen(BoxLayout):
         self.app.logsScreenChild.ids.ChartImageId.reload()
         self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: [i][b]' + accountID + '[/b][/i]'
         self.app.screenManager.current = LOGS_SCREEN
+
+    def createTransactionCallback(self, accountID, transactionType):
+        self.app.createTransactionScreenCallback()
+        if transactionType == '+':
+            self.app.transactionScreenChild.ids.toAccountTextInput.text = accountID
+        elif transactionType == '-':
+            self.app.transactionScreenChild.ids.fromAccountTextInput.text = accountID
+        self.app.screenManager.current = CREATE_TRANSACTION_SCREEN

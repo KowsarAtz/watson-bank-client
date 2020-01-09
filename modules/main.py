@@ -19,6 +19,7 @@ from SignUpScreen import SignUpScreen
 from AccountsListScreen import AccountsListScreen
 from TransactionsListScreen import TransactionsListScreen
 from LogsScreen import LogsScreen
+from CreateTransactionScreen import CreateTransactionScreen
 
 root = Builder.load_file(LOGIN_SCREEN_KV)
 root = Builder.load_file(MENU_SCREEN_KV)
@@ -26,7 +27,7 @@ root = Builder.load_file(SIGNUP_SCREEN_KV)
 root = Builder.load_file(ALL_ACCOUNTS_SCREEN_KV)
 root = Builder.load_file(ALL_TRANSACTIONS_SCREEN_KV)
 root = Builder.load_file(LOGS_SCREEN_KV)
-
+root = Builder.load_file(CREATE_TRANSACTION_SCREEN_KV)
 
 class MyApp(App):
     def build(self):
@@ -44,7 +45,6 @@ class MyApp(App):
         if not readToken() == None:
             self.screenManager.add_widget(screenMenu)
             self.screenManager.add_widget(screenLogin)
-            self.afterLoginCallback()
         else:
             self.screenManager.add_widget(screenLogin)
             self.screenManager.add_widget(screenMenu)
@@ -54,21 +54,35 @@ class MyApp(App):
         screen.add_widget(self.signupScreen)
         self.screenManager.add_widget(screen)
 
-        return self.screenManager
-    
-    def afterLoginCallback(self):
-        self.allAccountsScreen = AccountsListScreen(self)
-        screen = Screen(name=ALL_ACCOUNTS_SCREEN)
-        screen.add_widget(self.allAccountsScreen)
-        self.screenManager.add_widget(screen)
+        self.allTransactionsScreen = None
+        self.allTransactionsScreenChild = None
 
-        self.allTransactionsScreen = TransactionsListScreen(self)
-        screen = Screen(name=ALL_TRANSACTIONS_SCREEN)
-        screen.add_widget(self.allTransactionsScreen)
-        self.screenManager.add_widget(screen)
+        self.allAccountsScreen = None
+        self.allAccountsScreenChild = None
 
         self.logsScreen = None
         self.logsScreenChild = None
+
+        self.transactionScreen = None
+        self.transactionScreenChild = None
+
+        return self.screenManager    
+
+    def allAccountsScreenCallback(self):
+        if not self.allAccountsScreen == None:
+            self.screenManager.remove_widget(self.allAccountsScreen)
+        self.allAccountsScreenChild = AccountsListScreen(self)
+        self.allAccountsScreen = Screen(name=ALL_ACCOUNTS_SCREEN)
+        self.allAccountsScreen.add_widget(self.allAccountsScreenChild)
+        self.screenManager.add_widget(self.allAccountsScreen)
+
+    def allTransactionsScreenCallback(self):
+        if not self.allTransactionsScreen == None:
+            self.screenManager.remove_widget(self.allTransactionsScreen)
+        self.allTransactionsScreenChild = TransactionsListScreen(self)
+        self.allTransactionsScreen = Screen(name=ALL_TRANSACTIONS_SCREEN)
+        self.allTransactionsScreen.add_widget(self.allTransactionsScreenChild)
+        self.screenManager.add_widget(self.allTransactionsScreen)
 
     def loadLogScreenCallback(self):
         if not self.logsScreen == None:
@@ -77,6 +91,14 @@ class MyApp(App):
         self.logsScreen = Screen(name=LOGS_SCREEN)
         self.logsScreen.add_widget(self.logsScreenChild)
         self.screenManager.add_widget(self.logsScreen)
+
+    def createTransactionScreenCallback(self):
+        if not self.transactionScreen == None:
+            self.screenManager.remove_widget(self.transactionScreen)
+        self.transactionScreenChild = CreateTransactionScreen(self)
+        self.transactionScreen = Screen(name=CREATE_TRANSACTION_SCREEN)
+        self.transactionScreen.add_widget(self.transactionScreenChild)
+        self.screenManager.add_widget(self.transactionScreen)
 
 if __name__ == '__main__':
     MyApp().run()

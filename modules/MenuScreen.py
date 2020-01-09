@@ -15,7 +15,13 @@ class MenuScreen(BoxLayout):
         self.app.screenManager.current = SIGNUP_SCREEN
 
     def getAllAccountsCallback(self):
+        self.app.allAccountsScreenCallback()
         self.app.screenManager.current = ALL_ACCOUNTS_SCREEN
 
     def getAllTransactionsCallback(self):
+        self.app.allTransactionsScreenCallback()
         self.app.screenManager.current = ALL_TRANSACTIONS_SCREEN
+
+    def createTransactionCallback(self):
+        self.app.createTransactionScreenCallback()
+        self.app.screenManager.current = CREATE_TRANSACTION_SCREEN

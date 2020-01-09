@@ -44,8 +44,13 @@
             size_hint: (0.5,1)
 
         BubbleButton:
-            text: '. . .'
-            # on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber)
+            text: '+'
+            on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '+')
+            size_hint: (0.5,1)
+
+        BubbleButton:
+            text: '-'
+            on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '-')
             size_hint: (0.5,1)
 
 <AccountsListScreen>:
@@ -110,13 +115,11 @@
             markup: True
             text: '[b]View Logs[/b]'
             size_hint: (0.5,1)
-            font_size: '14sp'
         
         Label:
             markup: True
             text: '[b]Create Transaction[/b]'
-            size_hint: (0.5,1)
-            font_size: '11sp'
+            size_hint: (1,1)
 
     RecycleView:
         id: rv

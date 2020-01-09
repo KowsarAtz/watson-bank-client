@@ -21,7 +21,6 @@ class LoginScreen(BoxLayout):
             Alert(title="Connection Error", text='Connection Error, Try Again Later')
             return
         if tokenStored:
-            self.app.afterLoginCallback()
             self.app.screenManager.current = MENU_SCREEN
             return
         Alert(title="Auhthentication Error", text='Invalid Username or Password, Try Again')

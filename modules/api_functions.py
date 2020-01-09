@@ -90,45 +90,49 @@ def getAllTransactions(token):
 
 def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = False):
     url = BASE_URL + 'transaction/TransactionListCreate'
-    data = {
-        'fromAccount': fromAccount,
-        'toAccount': toAccount,
-        'amount': amount,
-        'definition': info,
-        'cash': cash
-    }
+    data = None
+    if cash == False:
+        data = {
+            'fromAccount': fromAccount,
+            'toAccount': toAccount,
+            'amount': amount,
+            'definition': info,
+            'cash': cash
+        }
+    else:
+        if fromAccount == None:
+            data = {
+                'toAccount': toAccount,
+                'amount': amount,
+                'definition': info,
+                'cash': cash
+            }
+        else:
+            data = {
+                'fromAccount': fromAccount,
+                'amount': amount,
+                'definition': info,
+                'cash': cash
+            }
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
     if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
         return response.json()
+    elif response.status_code == 400:
+        msg = ''
+        d = response.json()
+        for key in d:
+            for str_ in d[key]:
+                msg += str_.upper() + ' ; '
+        return msg[:-2]
     return None
     # to be completed . . .
     '''
     errors:
         {"non_field_errors":["Invalid value for cash"]}
         {"non_field_errors":["account numbers are the same"]}
-        {"toAccount":["This field may not be blank."]}
-        {"toAccount":["This field may not be null."]} !!!!!!!!!!!!!!!!
         {"fromAccount":["from account is not valid"],"toAccount":["This field may not be null."]}  
         {"non_field_errors":["not enough credit"]}      
     '''
 
-def getCashTransaction(token, amount, fromAccount, info = '', cash = False):
-    url = BASE_URL + 'transaction/TransactionListCreate'
-    data = {
-        'fromAccount': fromAccount,
-        'amount': amount,
-        'definition': info,
-        'cash': cash
-    }
-    response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    print(response.text)
-    if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
-        return response.json()
-    return None
-    # to be completed . . .
-
 # print(createTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE1ODE5NDY5MjksImVtYWlsIjoiIn0.kI2e36eepYcYiZcEaMQ-LXHBXNcWxh51yiS2etfc3xI'
 #         , 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
-
-# print(getAllTransactions('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MTk0NzE5MywiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.AdnrTqGuMldnAB9c-pVc29bld5jItQ2EMwVgQ4TGLAc'))
-print(getCashTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6Imtvd3NhcmF0eiIsImV4cCI6MTU4MjA0NDI3NCwiZW1haWwiOiJrb3dzYXIuYXRhemFkZWhAZ21haWwuY29tIn0.LB-3MAJYI9lVDUn4G4g6nM6x86g6ZS7xFaBkrcwhWOg', 10, '157712224022436000', cash=True))
