@@ -1,8 +1,8 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 <LogsScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#232130") 
+            rgb: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -10,7 +10,7 @@
     orientation: 'vertical'
     spacing: dp(1)
 
-    Label:
+    MyLabel:
         id: ChartLabel
         text: 'chart label'
         size_hint: (1,0.1)
@@ -18,18 +18,18 @@
 
     Image:
         id: ChartImageId
-        source: './chart.png'
+        source: './assets/chart.png'
         # size: self.texture_size
         size_hint: (0.9,0.9)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
     BoxLayout:
         orientation: 'horizontal'
         spacing: dp(2)
         size_hint: (0.2, 0.07)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
-        Button:
+        MyButton:
             text: 'Back To Accounts List'
             on_release: root.backToAccountsListScreenCallback()
     

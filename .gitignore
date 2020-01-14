@@ -6,6 +6,7 @@ test/
 *$py.class
 token
 chart.png
+assets/chart.png
 
 # C extensions
 *.so

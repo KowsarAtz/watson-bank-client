@@ -1,8 +1,8 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 <SignUpScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#232130") 
+            rgb: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -10,34 +10,32 @@
     spacing: '10'
     BoxLayout:
         size_hint: (1,7)
-    TextInput:
-        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    MyTextInput:
         id: chosenUsernameTextInput
         write_tab: False
         multiline: False
         hint_text: 'Username'
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
-    TextInput:
-        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+        pos_hint: {'center_x':0.5}
+    MyTextInput:
         id: chosenPasswordTextInput
         write_tab: False
         multiline: False
         password: True
         hint_text: 'Password'
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
-    Button:
+        pos_hint: {'center_x':0.5}
+    MyButton:
         markup: True
-        text: '[b]REGISTER[/b]'
+        text: 'REGISTER'
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.signUpCallback()
-    Button:
+    MyButton:
         markup: True
-        text: '[b]CANCEL[/b]'
+        text: 'CANCEL'
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.cancelSignUpCallback()
     BoxLayout:
         size_hint: (1,7)

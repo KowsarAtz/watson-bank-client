@@ -1,6 +1,6 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 
-<TransactionRow@BoxLayout>:
+<TransactionRow@RowBoxLayout>:
     index: ''
     transactionID: ''
     fromAccountNumber: ''
@@ -9,68 +9,56 @@
     type: ''
     describtion: ''
 
-    canvas.before:
-        Color:
-            rgba: utils.get_color_from_hex("#383354") 
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    MyLabel:
+        text: root.transactionID
+        size_hint: (1,1)
 
-    BoxLayout:
-        spacing: dp(1)
-        orientation: 'horizontal'
+    MyLabel:
+        text: root.amount
+        size_hint: (1,1)
 
-        Label:
-            text: root.transactionID
-            size_hint: (1,1)
+    MyLabel:
+        text: root.type
+        size_hint: (0.5,1)
+    
+    MyLabel:
+        text: root.fromAccountNumber
+        size_hint: (2,1)
+    
+    MyLabel:
+        text: root.toAccountNumber
+        size_hint: (2,1)
 
-        Label:
-            text: root.amount
-            size_hint: (1,1)
-
-        Label:
-            text: root.type
-            size_hint: (0.5,1)
-        
-        Label:
-            text: root.fromAccountNumber
-            size_hint: (2,1)
-        
-        Label:
-            text: root.toAccountNumber
-            size_hint: (2,1)
-
-        BubbleButton:
-            text: '. . .'
-            on_release: root.parent.parent.parent.showDescribtionCallback(root.describtion)
-            size_hint: (0.5,1)
+    BubbleButton:
+        text: '. . .'
+        on_release: root.parent.parent.parent.showDescribtionCallback(root.describtion)
+        size_hint: (0.5,1)
 
 <TransactionsListScreen>:
     canvas:
         Color:
-            rgba: utils.get_color_from_hex("#232130") 
+            rgba: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
     orientation: 'vertical'
 
     BoxLayout:
-        spacing: dp(1)
+        spacing: dp(5)
         orientation: 'horizontal'
         size_hint: (1, 0.11)
         padding: [10,20,10,0]
 
-        BubbleButton:
+        MyButton:
             markup: True
-            text: '[b][i]Back to Menu[/i][/b]'
-            size_hint: (2,1)
+            text: 'Back to Menu'
+            size_hint: (1,1)
             on_release: root.backToMenuCallback()
 
-        TextInput:
+        MyTextInput:
             hint_text: 'Search for Account Number or Transaction ID . . .'
             on_text: root.searchCallback(self.text)
             size_hint: (8,1)
-            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
 
     BoxLayout:
         spacing: dp(1)
@@ -78,34 +66,34 @@
         size_hint: (1, 0.1)
         padding: [20,0,30,0]
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Transaction ID[/b]'
+            text: 'Transaction ID'
             size_hint: (1,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Amount[/b]'
+            text: 'Amount'
             size_hint: (1,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Type[/b]'
+            text: 'Type'
             size_hint: (0.5,1)
         
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]From Account[/b]'
+            text: 'From Account'
             size_hint: (2,1)
         
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]To Account[/b]'
+            text: 'To Account'
             size_hint: (2,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Info[/b]'
+            text: 'Info'
             size_hint: (0.5,1)
 
     RecycleView:

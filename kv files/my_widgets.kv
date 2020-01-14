@@ -1,0 +1,58 @@
+#:import C kivy.utils.get_color_from_hex
+<MyButton@Button>:
+    font_name: 'MyBoldFont'
+    background_color: (0,0,0,0)
+    background_normal: ''
+    border_radius: [10]
+    canvas.before:
+        Color: 
+            rgba: C("#383354") if self.state == 'normal' else C("#d14621") 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius[0])
+            width: 0.5
+
+<MyTextInput@TextInput>:
+    font_name: 'MyRegularFont'
+    border_radius: 10
+    bold: True
+    padding_x: [20,20]
+    padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    background_color: 0,0,0,0
+    cursor_color: C('#ffffff')
+    canvas.before:
+        Color:
+            rgba: C('#ffffff')
+    canvas.after:
+        Color:
+            rgba: C("#685f9b") 
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius)
+            width: 0.5
+
+<MyLabel@Label>:
+    font_name: 'MyRegularFont'
+
+<MyTitleLabel@Label>:
+    font_name: 'MyBoldFont'
+
+<RowBoxLayout@BoxLayout>:
+    spacing: dp(1)
+    orientation: 'horizontal'
+    font_name: 'MyBoldFont'
+    background_color: (0,0,0,0)
+    background_normal: ''
+    border_radius: [10]
+    canvas.before:
+        Color: 
+            rgba: C("#383354") 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+        # Line:
+        #     rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius[0])
+        #     width: 0.5

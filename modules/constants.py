@@ -16,8 +16,9 @@ ALL_ACCOUNTS_SCREEN_KV = '../kv files/accountslist_screen.kv'
 ALL_TRANSACTIONS_SCREEN_KV = '../kv files/transactionslist_screen.kv'
 LOGS_SCREEN_KV = '../kv files/logs_screen.kv'
 CREATE_TRANSACTION_SCREEN_KV = '../kv files/create_transaction_screen.kv'
+MY_WIDGETS_KV = '../kv files/my_widgets.kv'
 
-CHART_PATH = './chart.png'
+CHART_PATH = './assets/chart.png'
 
 INVALID_TOKEN_CODE = 401
 INVALID_CODE = 400

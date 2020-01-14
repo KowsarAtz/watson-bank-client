@@ -1,8 +1,8 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 <CreateTransactionScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#232130") 
+            rgb: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -12,53 +12,50 @@
     BoxLayout:
         size_hint: (1,6)
 
-    TextInput:
-        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    MyTextInput:
         id: fromAccountTextInput
         write_tab: False
         multiline: False
         hint_text: 'Source Account ID (Leave Empty for Cash Send Transaction)'
         size_hint: (0.5, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
-    TextInput:
-        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    MyTextInput:
         id: toAccountTextInput
         write_tab: False
         multiline: False
         hint_text: 'Destination Account ID (Leave Empty for Cash Receive Transaction)'
         size_hint: (0.5, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
-    TextInput:
-        padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
+    MyTextInput:
         id: transactionAmountTextInput
         write_tab: False
         multiline: False
         hint_text: 'Transaction Amount'
         size_hint: (0.5, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
-    TextInput:
+    MyTextInput:
         id: transactionDescribtionTextInput
         write_tab: False
         multiline: True
         hint_text: 'Transaction Describtion'
         size_hint: (0.5, 3)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
 
-    Button:
+    MyButton:
         markup: True
-        text: '[b]CREATE TRANSACTION[/b]'
+        text: 'CREATE TRANSACTION'
         size_hint: (0.5, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.createTransactionCallback()
 
-    Button:
+    MyButton:
         markup: True
-        text: '[b]CANCEL[/b]'
+        text: 'CANCEL'
         size_hint: (0.5, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.cancelTransactionCallback()
 
     BoxLayout:

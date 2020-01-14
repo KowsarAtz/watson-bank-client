@@ -1,84 +1,72 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 
-<Row@BoxLayout>:
+<Row@RowBoxLayout>:
     accountNumber: ''
     ownerName: ''
     ownerID: ''
     credit: ''
     status: ''
 
-    canvas.before:
-        Color:
-            rgba: utils.get_color_from_hex("#383354") 
-        Rectangle:
-            size: self.size
-            pos: self.pos
+    MyLabel:
+        text: root.accountNumber
+        size_hint: (1.5,1)
 
-    BoxLayout:
-        spacing: dp(1)
-        orientation: 'horizontal'
+    MyLabel:
+        text: root.ownerName
+        size_hint: (1.5,1)
+    
+    MyLabel:
+        text: root.ownerID
+        size_hint: (1,1)
+    
+    MyLabel:
+        text: root.credit
+        size_hint: (0.5,1)
 
-        Label:
-            text: root.accountNumber
-            size_hint: (1.5,1)
+    MyLabel:
+        text: root.status
+        size_hint: (0.5,1)
+    
+    BubbleButton:
+        text: '. . .'
+        on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber)
+        size_hint: (0.5,1)
 
-        Label:
-            text: root.ownerName
-            size_hint: (1.5,1)
-        
-        Label:
-            text: root.ownerID
-            size_hint: (1,1)
-        
-        Label:
-            text: root.credit
-            size_hint: (0.5,1)
+    BubbleButton:
+        text: '+'
+        on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '+')
+        size_hint: (0.5,1)
 
-        Label:
-            text: root.status
-            size_hint: (0.5,1)
-        
-        BubbleButton:
-            text: '. . .'
-            on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber)
-            size_hint: (0.5,1)
-
-        BubbleButton:
-            text: '+'
-            on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '+')
-            size_hint: (0.5,1)
-
-        BubbleButton:
-            text: '-'
-            on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '-')
-            size_hint: (0.5,1)
+    BubbleButton:
+        text: '-'
+        on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '-')
+        size_hint: (0.5,1)
 
 <AccountsListScreen>:
     canvas:
         Color:
-            rgba: utils.get_color_from_hex("#232130") 
+            rgba: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
     orientation: 'vertical'
 
     BoxLayout:
-        spacing: dp(1)
+        spacing: dp(5)
         orientation: 'horizontal'
         size_hint: (1, 0.11)
         padding: [10,20,10,0]
 
-        BubbleButton:
+        MyButton:
             markup: True
-            text: '[b][i]Back to Menu[/i][/b]'
-            size_hint: (2,1)
+            text: 'Back to Menu'
+            size_hint: (1,1)
             on_release: root.backToMenuCallback()
 
-        TextInput:
+        MyTextInput:
             hint_text: 'Search for Account Number, Owner Name or Owner ID . . .'
             on_text: root.searchCallback(self.text)
             size_hint: (8,1)
-            padding_y: [self.height / 2.0 - (self.line_height / 2.0) * len(self._lines), 0]
 
     BoxLayout:
         spacing: dp(1)
@@ -86,39 +74,39 @@
         size_hint: (1, 0.1)
         padding: [20,0,30,0]
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Account Number[/b]'
+            text: 'Account Number'
             size_hint: (1.5,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Owner Name[/b]'
+            text: 'Owner Name'
             size_hint: (1.5,1)
         
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Owner ID[/b]'
+            text: 'Owner ID'
             size_hint: (1,1)
         
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Credit[/b]'
+            text: 'Credit'
             size_hint: (0.5,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Status[/b]'
+            text: 'Status'
             size_hint: (0.5,1)
 
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]View Logs[/b]'
+            text: 'View Logs'
             size_hint: (0.5,1)
         
-        Label:
+        MyTitleLabel:
             markup: True
-            text: '[b]Create Transaction[/b]'
+            text: 'Create Transaction'
             size_hint: (1,1)
 
     RecycleView:

@@ -11,6 +11,7 @@ Window.size = (1366,710)
 
 from kivy.lang import Builder
 from kivy.app import App
+from kivy.core.text import LabelBase
 from kivy.uix.screenmanager import ScreenManager, Screen
 from utility_functions import readToken
 from LoginScreen import LoginScreen
@@ -21,6 +22,12 @@ from TransactionsListScreen import TransactionsListScreen
 from LogsScreen import LogsScreen
 from CreateTransactionScreen import CreateTransactionScreen
 
+LabelBase.register('MyRegularFont', './assets/fonts/Rubik-Regular.ttf')
+LabelBase.register('MyBoldFont', './assets/fonts/Rubik-Bold.ttf')
+LabelBase.register('MyItalicFont', './assets/fonts/Rubik-Italic.ttf')
+
+
+root = Builder.load_file(MY_WIDGETS_KV)
 root = Builder.load_file(LOGIN_SCREEN_KV)
 root = Builder.load_file(MENU_SCREEN_KV)
 root = Builder.load_file(SIGNUP_SCREEN_KV)

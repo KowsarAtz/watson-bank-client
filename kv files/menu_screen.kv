@@ -1,8 +1,8 @@
-#:import utils kivy.utils
+#:import C kivy.utils.get_color_from_hex
 <MenuScreen>:
     canvas:
         Color:
-            rgb: utils.get_color_from_hex("#232130") 
+            rgb: C("#232130") 
         Rectangle:
             size: self.size
             pos: self.pos
@@ -13,39 +13,39 @@
     BoxLayout:
         size_hint: (1,3)
 
-    Button:
-        text: '[b]REGISTER NEW CLERK[/b]'
+    MyButton:
+        text: 'REGISTER NEW CLERK'
         markup: True
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.signUpClerkCallback()
 
-    Button:
-        text: '[b]ACCOUNTS LIST[/b]'
+    MyButton:
+        text: 'ACCOUNTS LIST'
         markup: True
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.getAllAccountsCallback()
 
-    Button:
-        text: '[b]CREATE TRANSACTION[/b]'
+    MyButton:
+        text: 'CREATE TRANSACTION'
         markup: True
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.createTransactionCallback()
 
-    Button:
-        text: '[b]TRANSACTIONS LIST[/b]'
+    MyButton:
+        text: 'TRANSACTIONS LIST'
         markup: True
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.getAllTransactionsCallback()
         
-    Button:
-        text: '[b]LOGOUT[/b]'
+    MyButton:
+        text: 'LOGOUT'
         markup: True
         size_hint: (0.3, 1)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}
         on_release: root.logoutCallback()
 
     BoxLayout:
@@ -54,4 +54,4 @@
     Image:
         source: './assets/payment.png'
         size_hint: (1,5)
-        pos_hint: {"center_x":0.5}
+        pos_hint: {'center_x':0.5}

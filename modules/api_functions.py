@@ -90,30 +90,16 @@ def getAllTransactions(token):
 
 def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = False):
     url = BASE_URL + 'transaction/TransactionListCreate'
-    data = None
-    if cash == False:
-        data = {
-            'fromAccount': fromAccount,
-            'toAccount': toAccount,
-            'amount': amount,
-            'definition': info,
-            'cash': cash
-        }
-    else:
-        if fromAccount == None:
-            data = {
-                'toAccount': toAccount,
-                'amount': amount,
-                'definition': info,
-                'cash': cash
-            }
-        else:
-            data = {
-                'fromAccount': fromAccount,
-                'amount': amount,
-                'definition': info,
-                'cash': cash
-            }
+    data = {}
+
+    data['amount'] = amount
+    data['definition'] = info
+    data['cash'] = cash
+    if not toAccount == None:
+        data['toAccount'] = toAccount
+    if not fromAccount == None:
+        data['fromAccount'] = fromAccount
+
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
     if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
         return response.json()
@@ -125,14 +111,3 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
                 msg += str_.upper() + ' ; '
         return msg[:-2]
     return None
-    # to be completed . . .
-    '''
-    errors:
-        {"non_field_errors":["Invalid value for cash"]}
-        {"non_field_errors":["account numbers are the same"]}
-        {"fromAccount":["from account is not valid"],"toAccount":["This field may not be null."]}  
-        {"non_field_errors":["not enough credit"]}      
-    '''
-
-# print(createTransaction('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VybmFtZSI6InRlc3QiLCJleHAiOjE1ODE5NDY5MjksImVtYWlsIjoiIn0.kI2e36eepYcYiZcEaMQ-LXHBXNcWxh51yiS2etfc3xI'
-#         , 100 ,cash=True,fromAccount='157712224022436000', toAccount=None))
