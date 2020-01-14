@@ -1,4 +1,5 @@
 #:import C kivy.utils.get_color_from_hex
+#:import copyToClip pyperclip.copy
 
 <Row@RowBoxLayout>:
     accountNumber: ''
@@ -7,9 +8,20 @@
     credit: ''
     status: ''
 
+    Button:
+        background_color: (0,0,0,0)
+        size_hint: (0.3,0.5)
+        on_release: copyToClip(root.accountNumber)
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        Image:
+            source: './assets/copy.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: 20,20
+
     MyLabel:
         text: root.accountNumber
-        size_hint: (1.5,1)
+        size_hint: (1,1)
 
     MyLabel:
         text: root.ownerName
@@ -27,20 +39,38 @@
         text: root.status
         size_hint: (0.5,1)
     
-    BubbleButton:
-        text: '. . .'
+    Button:
+        background_color: (0,0,0,0)
+        size_hint: (0.3,1)
         on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber)
-        size_hint: (0.5,1)
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        Image:
+            source: './assets/log.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: 20,20
 
-    BubbleButton:
-        text: '+'
+    Button:
+        background_color: (0,0,0,0)
+        size_hint: (0.3,1)
         on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '+')
-        size_hint: (0.5,1)
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        Image:
+            source: './assets/add.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: 20,20
 
-    BubbleButton:
-        text: '-'
+    Button:
+        background_color: (0,0,0,0)
+        size_hint: (0.3,1)
         on_release: root.parent.parent.parent.createTransactionCallback(root.accountNumber, '-')
-        size_hint: (0.5,1)
+        pos_hint: {'center_x':0.5, 'center_y':0.5}
+        Image:
+            source: './assets/sub.png'
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+            size: 20,20    
 
 <AccountsListScreen>:
     canvas:
@@ -74,10 +104,13 @@
         size_hint: (1, 0.1)
         padding: [20,0,30,0]
 
+        BoxLayout:
+            size_hint: (0.3, 1)
+
         MyTitleLabel:
             markup: True
             text: 'Account Number'
-            size_hint: (1.5,1)
+            size_hint: (1,1)
 
         MyTitleLabel:
             markup: True
@@ -99,15 +132,24 @@
             text: 'Status'
             size_hint: (0.5,1)
 
-        MyTitleLabel:
-            markup: True
-            text: 'View Logs'
-            size_hint: (0.5,1)
+        BoxLayout:
+            size_hint: (0.3, 1)
+
+        BoxLayout:
+            size_hint: (0.3, 1)
         
-        MyTitleLabel:
-            markup: True
-            text: 'Create Transaction'
-            size_hint: (1,1)
+        BoxLayout:
+            size_hint: (0.3, 1)
+
+        # MyTitleLabel:
+        #     markup: True
+        #     text: 'View Logs'
+        #     size_hint: (0.5,1)
+        
+        # MyTitleLabel:
+        #     markup: True
+        #     text: 'Create Transaction'
+        #     size_hint: (1,1)
 
     RecycleView:
         id: rv
