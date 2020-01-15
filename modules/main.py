@@ -2,13 +2,6 @@ from constants import *
 
 from kivy.config import Config
 Config.set('graphics', 'fullscreen', 'auto')
-# Config.set('graphics', 'resizable', FALSE)
-# Config.set('graphics', 'width', '900')
-# Config.set('graphics', 'height', '900')
-
-# from kivy.core.window import Window
-# Window.size = (1366,710)
-# Window.fullscreen = 'auto'
 
 from kivy.lang import Builder
 from kivy.app import App

@@ -23,17 +23,13 @@
     Image:
         id: ChartImageId
         source: './assets/chart.png'
-        # size: self.texture_size
         size_hint: (0.9,0.9)
         pos_hint: {'center_x':0.5}
 
     BoxLayout:
         orientation: 'horizontal'
         spacing: dp(8)
-        size_hint: (1, 0.07)
-
-        BoxLayout:
-            size_hint: (0.7,1)
+        size_hint: (None, 0.07)
 
         MyButton:
             size_hint: (None, 1)
@@ -45,11 +41,7 @@
             id: pageButtonsLayout
             orientation: 'horizontal'
             spacing: dp(4)
-            size_hint: (None, 1)
-
-
-        BoxLayout:
-            size_hint: (1,1)
+            size_hint: (1, 1)
 
     BoxLayout:
         size_hint: (1, 0.1)

@@ -6,6 +6,7 @@ from utility_functions import readToken, removeToken
 from LogsScreen import PageButton
 from Alert import Alert
 from math import ceil
+from kivy.core.window import Window
 from constants import *
 
 class AccountsListScreen(BoxLayout):
@@ -87,7 +88,9 @@ class AccountsListScreen(BoxLayout):
         
         self.app.logsScreenChild.pageButtons[totalPages-1].pageClickCallback(totalPages-1)
         self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: ' + accountID +'\nOwner Name: ' + ownerName
-
+                
+        leftPadding = Window.size[0]/2 - ((totalPages-1)*4+8+200+totalPages*70)/2
+        self.app.logsScreenChild.ids.pageButtonsLayout.parent.padding = [leftPadding,0,0,0]
         self.app.screenManager.current = LOGS_SCREEN
 
     def createTransactionCallback(self, accountID, transactionType):
