@@ -15,6 +15,28 @@
             rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius[0])
             width: 0.5
 
+<PageButton>:
+    text: '1'
+    font_name: 'MyBoldFont'
+    background_color: (0,0,0,0)
+    background_normal: ''
+    border_radius: [10]
+    pressed: False
+    number: -1
+    size_hint: (None, 1)
+    width: dp(70)
+    canvas.before:
+        Color: 
+            rgba: C("#383354") if not self.pressed else C("#f73737") 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+        Line:
+            rounded_rectangle: (self.pos[0], self.pos[1], self.size[0], self.size[1], self.border_radius[0])
+            width: 0.5
+    on_release: root.pageClickCallback(self.number)
+
 <MyTextInput@TextInput>:
     font_name: 'MyRegularFont'
     border_radius: 10

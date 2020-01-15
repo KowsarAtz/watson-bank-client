@@ -9,6 +9,8 @@ ALL_TRANSACTIONS_SCREEN = 'all_transactions'
 LOGS_SCREEN = 'logs'
 CREATE_TRANSACTION_SCREEN = 'create_transaction'
 
+TRANSACTION_PER_PAGE = 15
+
 LOGIN_SCREEN_KV = '../kv files/login_screen.kv'
 MENU_SCREEN_KV = '../kv files/menu_screen.kv'
 SIGNUP_SCREEN_KV = '../kv files/signup_screen.kv'

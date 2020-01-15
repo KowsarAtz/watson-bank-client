@@ -3,8 +3,9 @@ from string import ascii_lowercase
 from kivy.uix.boxlayout import BoxLayout
 from api_functions import getAllAccounts, getAccountLogs, BLOCKED, OPEN, CLOSED
 from utility_functions import readToken, removeToken
-from LogsScreen import createLogsChart
+from LogsScreen import PageButton
 from Alert import Alert
+from math import ceil
 from constants import *
 
 class AccountsListScreen(BoxLayout):
@@ -52,7 +53,7 @@ class AccountsListScreen(BoxLayout):
     def backToMenuCallback(self):
         self.app.screenManager.current = MENU_SCREEN
 
-    def showLogsCallback(self, accountID):
+    def showLogsCallback(self, accountID, ownerName):
         logs = getAccountLogs(readToken(), int(accountID))
         if logs == None:
             removeToken()
@@ -66,10 +67,27 @@ class AccountsListScreen(BoxLayout):
             Alert(title="Account Logs", text='There are no logs to show!', time=3, linesNumber=1)
             return
 
-        createLogsChart(logs, currentCredit)
         self.app.loadLogScreenCallback()
-        self.app.logsScreenChild.ids.ChartImageId.reload()
-        self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: ' + accountID
+        self.app.logsScreenChild.logs = logs
+        self.app.logsScreenChild.createLogsChart(logs, currentCredit)
+
+        totalPages = ceil(len(logs)/TRANSACTION_PER_PAGE)
+        firstPageTransationCount = len(logs) - (totalPages - 1)*TRANSACTION_PER_PAGE
+
+        pageButton = PageButton(self.app, 0, '%d-%d'%(1, firstPageTransationCount))
+        self.app.logsScreenChild.pageButtons += [pageButton]
+        self.app.logsScreenChild.ids.pageButtonsLayout.add_widget(pageButton)
+
+        base = firstPageTransationCount + 1
+        for i in range(1,totalPages):
+            pageButton = PageButton(self.app, i, '%d-%d'%(base, base + (TRANSACTION_PER_PAGE - 1)))
+            self.app.logsScreenChild.pageButtons += [pageButton]
+            self.app.logsScreenChild.ids.pageButtonsLayout.add_widget(pageButton)
+            base += TRANSACTION_PER_PAGE
+        
+        self.app.logsScreenChild.pageButtons[totalPages-1].pageClickCallback(totalPages-1)
+        self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: ' + accountID +'\nOwner Name: ' + ownerName
+
         self.app.screenManager.current = LOGS_SCREEN
 
     def createTransactionCallback(self, accountID, transactionType):

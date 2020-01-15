@@ -42,7 +42,7 @@
     Button:
         background_color: (0,0,0,0)
         size_hint: (0.3,1)
-        on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber)
+        on_release: root.parent.parent.parent.showLogsCallback(root.accountNumber, root.ownerName)
         pos_hint: {'center_x':0.5, 'center_y':0.5}
         Image:
             source: './assets/log.png'
