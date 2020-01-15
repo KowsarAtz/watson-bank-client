@@ -58,6 +58,8 @@ def createChart(names, baseBar, greenBar, redBar, y):
     plt.bar(r, baseBar, color='#7f6d5f', edgecolor='white', width=barWidth)
     plt.bar(r, greenBar, bottom=baseBar, color='#3ba010', edgecolor='white', width=barWidth)
     plt.bar(r, redBar, bottom=baseBar, color='#f73737', edgecolor='white', width=barWidth)
+    x1,x2,y1,y2 = plt.axis()
+    plt.axis((x1,x2,y1,y2 + 0.05*y2))
     plt.plot(r, y, 'w--')
     plt.xticks(r, names, rotation='vertical')
     plt.savefig(CHART_PATH, bbox_inches='tight', transparent=True , dpi=100)

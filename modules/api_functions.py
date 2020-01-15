@@ -1,7 +1,7 @@
 import requests
 
-BASE_URL = 'http://localhost:8000/api/'
-# BASE_URL = 'http://176.9.164.222:2211/api/'
+# BASE_URL = 'http://localhost:8000/api/'
+BASE_URL = 'http://176.9.164.222:2211/api/'
 BLOCKED = 'B'
 OPEN = 'O'
 CLOSED = 'C'
