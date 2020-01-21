@@ -1,7 +1,7 @@
 from constants import *
 
 from kivy.config import Config
-Config.set('graphics', 'fullscreen', 'auto')
+# Config.set('graphics', 'fullscreen', 'auto')
 
 from kivy.lang import Builder
 from kivy.app import App
@@ -13,7 +13,6 @@ from MenuScreen import MenuScreen
 from SignUpScreen import SignUpScreen
 from AccountsListScreen import AccountsListScreen
 from TransactionsListScreen import TransactionsListScreen
-from LogsScreen import LogsScreen
 from CreateTransactionScreen import CreateTransactionScreen
 from CreateAccountScreen import CreateAccountScreen
 
@@ -28,9 +27,9 @@ root = Builder.load_file(MENU_SCREEN_KV)
 root = Builder.load_file(SIGNUP_SCREEN_KV)
 root = Builder.load_file(ALL_ACCOUNTS_SCREEN_KV)
 root = Builder.load_file(ALL_TRANSACTIONS_SCREEN_KV)
-root = Builder.load_file(LOGS_SCREEN_KV)
 root = Builder.load_file(CREATE_TRANSACTION_SCREEN_KV)
 root = Builder.load_file(CREATE_ACCOUNT_SCREEN_KV)
+root = Builder.load_file(SHOW_LOGS_POPUP_KV)
 
 class MyApp(App):
     def build(self):
@@ -68,9 +67,6 @@ class MyApp(App):
         self.allAccountsScreen = None
         self.allAccountsScreenChild = None
 
-        self.logsScreen = None
-        self.logsScreenChild = None
-
         self.transactionScreen = None
         self.transactionScreenChild = None
 
@@ -91,14 +87,6 @@ class MyApp(App):
         self.allTransactionsScreen = Screen(name=ALL_TRANSACTIONS_SCREEN)
         self.allTransactionsScreen.add_widget(self.allTransactionsScreenChild)
         self.screenManager.add_widget(self.allTransactionsScreen)
-
-    def loadLogScreenCallback(self):
-        if not self.logsScreen == None:
-            self.screenManager.remove_widget(self.logsScreen)
-        self.logsScreenChild = LogsScreen(self)
-        self.logsScreen = Screen(name=LOGS_SCREEN)
-        self.logsScreen.add_widget(self.logsScreenChild)
-        self.screenManager.add_widget(self.logsScreen)
 
     def createTransactionScreenCallback(self):
         if not self.transactionScreen == None:

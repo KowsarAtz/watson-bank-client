@@ -1,13 +1,64 @@
 from random import sample
 from string import ascii_lowercase
+from kivy.uix.popup import Popup
 from kivy.uix.boxlayout import BoxLayout
 from api_functions import getAllAccounts, getAccountLogs, BLOCKED, OPEN, CLOSED
 from utility_functions import readToken, removeToken
-from LogsScreen import PageButton
 from Alert import Alert
 from math import ceil
 from kivy.core.window import Window
 from constants import *
+
+class ShowLogsPopUp(BoxLayout):
+    def __init__(self, logs, currentCredit, accountID, ownerName, **kwargs):
+        super(ShowLogsPopUp, self).__init__(**kwargs)
+        self.accountID = accountID
+        self.ownerName = ownerName
+        self.logs = logs
+        self.bars = {
+            'names': None, 
+            'baseBar': None, 
+            'greenBar': None, 
+            'redBar': None,
+            'y': None
+        }
+        self.createLogsChart(logs, currentCredit)
+
+    def createLogsChart(self, logs, currentCredit):
+        all_ = logs[:]
+        greenBar = []
+        redBar = []
+        baseBar = []
+        names = []
+        sum_ = 0
+        for log in all_:
+            if log['logType'] == '+':
+                t = float(log['amount'])
+                greenBar += [t]
+                redBar += [0]
+                baseBar += [t]
+                sum_ += t
+            elif log['logType'] == '-':
+                t = float(log['amount'])
+                redBar += [t]
+                greenBar += [0]
+                baseBar += [-t]
+                sum_ += (-t)
+            names += [str(log['id']) + ' , ' + log['date'][11:16] + '\n' + log['date'][:10]]
+        
+        baseCredit = currentCredit - sum_
+        for i in range(len(baseBar)):
+            baseBar[i] += baseCredit
+            baseCredit = baseBar[i]
+        y = baseBar[:]
+        for i in range(len(baseBar)):
+            baseBar[i] -= greenBar[i]
+
+        self.bars['names'] = names
+        self.bars['baseBar'] = baseBar
+        self.bars['greenBar'] = greenBar
+        self.bars['redBar'] = redBar
+        self.bars['y'] = y
 
 class AccountsListScreen(BoxLayout):
 
@@ -68,30 +119,10 @@ class AccountsListScreen(BoxLayout):
             Alert(title="Account Logs", text='There are no logs to show!', time=3, linesNumber=1)
             return
 
-        self.app.loadLogScreenCallback()
-        self.app.logsScreenChild.logs = logs
-        self.app.logsScreenChild.createLogsChart(logs, currentCredit)
-
-        totalPages = ceil(len(logs)/TRANSACTION_PER_PAGE)
-        firstPageTransationCount = len(logs) - (totalPages - 1)*TRANSACTION_PER_PAGE
-
-        pageButton = PageButton(self.app, 0, '%d-%d'%(1, firstPageTransationCount))
-        self.app.logsScreenChild.pageButtons += [pageButton]
-        self.app.logsScreenChild.ids.pageButtonsLayout.add_widget(pageButton)
-
-        base = firstPageTransationCount + 1
-        for i in range(1,totalPages):
-            pageButton = PageButton(self.app, i, '%d-%d'%(base, base + (TRANSACTION_PER_PAGE - 1)))
-            self.app.logsScreenChild.pageButtons += [pageButton]
-            self.app.logsScreenChild.ids.pageButtonsLayout.add_widget(pageButton)
-            base += TRANSACTION_PER_PAGE
-        
-        self.app.logsScreenChild.pageButtons[totalPages-1].pageClickCallback(totalPages-1)
-        self.app.logsScreenChild.ids.ChartLabel.text = 'Account ID: ' + accountID +'\nOwner Name: ' + ownerName
-                
-        leftPadding = Window.size[0]/2 - ((totalPages-1)*4+8+200+totalPages*70)/2
-        self.app.logsScreenChild.ids.pageButtonsLayout.parent.padding = [leftPadding,0,0,0]
-        self.app.screenManager.current = LOGS_SCREEN
+        logsPopup = ShowLogsPopUp(logs, currentCredit, accountID, ownerName)
+        popUpWindow = Popup(title="Logs", content=logsPopup, size_hint = (None, None), size=(400,400))
+        popUpWindow.open()
+        return
 
     def createTransactionCallback(self, accountID, transactionType):
         self.app.createTransactionScreenCallback()

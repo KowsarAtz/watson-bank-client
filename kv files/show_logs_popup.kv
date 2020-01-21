@@ -1,0 +1,40 @@
+#:import C kivy.utils.get_color_from_hex
+<ShowLogsPopUp>:
+
+    orientation: 'vertical'
+    spacing: '10'
+
+    BoxLayout:
+        size_hint: (1,1)
+
+    MyButton:
+        text: 'SHOW LAST 20'
+        markup: True
+        size_hint: (0.7, 1)
+        pos_hint: {'center_x':0.5}
+        # on_release: root.signUpClerkCallback()
+
+    MyButton:
+        text: 'SHOW LAST 10'
+        markup: True
+        size_hint: (0.7, 1)
+        pos_hint: {'center_x':0.5}
+        # on_release: root.createAccountCallback()
+
+    MyTextInput:
+        id: customRangeTextInput
+        write_tab: False
+        multiline: False
+        hint_text: 'enter a custom range like 1-10'
+        size_hint: (0.7, 1)
+        pos_hint: {'center_x':0.5}
+
+    MyButton:
+        text: 'SHOW CUSTOM RANGE'
+        markup: True
+        size_hint: (0.7, 1)
+        pos_hint: {'center_x':0.5}
+        # on_release: root.getAllAccountsCallback()
+
+    BoxLayout:
+        size_hint: (1, 1)
