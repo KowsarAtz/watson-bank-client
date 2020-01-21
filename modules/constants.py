@@ -8,6 +8,7 @@ ALL_ACCOUNTS_SCREEN = 'all_accounts'
 ALL_TRANSACTIONS_SCREEN = 'all_transactions'
 LOGS_SCREEN = 'logs'
 CREATE_TRANSACTION_SCREEN = 'create_transaction'
+CREATE_ACCOUNT_SCREEN = 'create_account'
 
 TRANSACTION_PER_PAGE = 15
 
@@ -18,12 +19,14 @@ ALL_ACCOUNTS_SCREEN_KV = '../kv files/accountslist_screen.kv'
 ALL_TRANSACTIONS_SCREEN_KV = '../kv files/transactionslist_screen.kv'
 LOGS_SCREEN_KV = '../kv files/logs_screen.kv'
 CREATE_TRANSACTION_SCREEN_KV = '../kv files/create_transaction_screen.kv'
+CREATE_ACCOUNT_SCREEN_KV = '../kv files/create_account_screen.kv'
 MY_WIDGETS_KV = '../kv files/my_widgets.kv'
 
 CHART_PATH = './assets/chart.png'
 
 INVALID_TOKEN_CODE = 401
 INVALID_CODE = 400
+DUPLICATE_CODE = 400
 POST_SUCCESS_CODE = 201
 GET_SUCCESS_CODE = 200
 NOT_FOUND_CODE = 404

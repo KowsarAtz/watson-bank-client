@@ -15,6 +15,7 @@ from AccountsListScreen import AccountsListScreen
 from TransactionsListScreen import TransactionsListScreen
 from LogsScreen import LogsScreen
 from CreateTransactionScreen import CreateTransactionScreen
+from CreateAccountScreen import CreateAccountScreen
 
 LabelBase.register('MyRegularFont', './assets/fonts/Rubik-Regular.ttf')
 LabelBase.register('MyBoldFont', './assets/fonts/Rubik-Bold.ttf')
@@ -29,6 +30,7 @@ root = Builder.load_file(ALL_ACCOUNTS_SCREEN_KV)
 root = Builder.load_file(ALL_TRANSACTIONS_SCREEN_KV)
 root = Builder.load_file(LOGS_SCREEN_KV)
 root = Builder.load_file(CREATE_TRANSACTION_SCREEN_KV)
+root = Builder.load_file(CREATE_ACCOUNT_SCREEN_KV)
 
 class MyApp(App):
     def build(self):
@@ -53,6 +55,11 @@ class MyApp(App):
         self.signupScreen = SignUpScreen(self)
         screen = Screen(name=SIGNUP_SCREEN)
         screen.add_widget(self.signupScreen)
+        self.screenManager.add_widget(screen)
+
+        self.createAccountScreen = CreateAccountScreen(self)
+        screen = Screen(name=CREATE_ACCOUNT_SCREEN)
+        screen.add_widget(self.createAccountScreen)
         self.screenManager.add_widget(screen)
 
         self.allTransactionsScreen = None

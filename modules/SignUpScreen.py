@@ -10,10 +10,17 @@ class SignUpScreen(BoxLayout):
         self.app = app
         self.usernameTextInput = self.ids.chosenUsernameTextInput
         self.passwordTextInput = self.ids.chosenPasswordTextInput
+        self.repeatPasswordTextInput = self.ids.chosenPasswordRepeatTextInput
 
     def signUpCallback(self):
-        if len(self.usernameTextInput.text.strip()) == 0 or len(self.passwordTextInput.text.strip()) == 0:
+        if len(self.usernameTextInput.text.strip()) == 0 \
+            or len(self.passwordTextInput.text.strip()) == 0\
+                or len(self.repeatPasswordTextInput.text.strip()) == 0:
             Alert(title="Input Error", text='Empty Fields are not Allowed Here! Try Again')
+            return
+        if not self.passwordTextInput.text.strip() ==\
+            self.repeatPasswordTextInput.text.strip():
+            Alert(title="Input Error", text='Passwords do not match! Try Again')
             return
         try:
             resultCode = signUp(readToken(), 

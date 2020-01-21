@@ -1,5 +1,5 @@
 #:import C kivy.utils.get_color_from_hex
-<SignUpScreen>:
+<CreateAccountScreen>:
     canvas:
         Color:
             rgb: C("#232130") 
@@ -11,39 +11,44 @@
     BoxLayout:
         size_hint: (1,7)
     MyTextInput:
-        id: chosenUsernameTextInput
+        id: firstNameTextInput
         write_tab: False
         multiline: False
-        hint_text: 'Username'
+        hint_text: 'First Name'
         size_hint: (0.3, 1)
         pos_hint: {'center_x':0.5}
     MyTextInput:
-        id: chosenPasswordTextInput
+        id: lastNameTextInput
         write_tab: False
         multiline: False
-        password: True
-        hint_text: 'Password'
+        hint_text: 'Last Name'
         size_hint: (0.3, 1)
         pos_hint: {'center_x':0.5}
     MyTextInput:
-        id: chosenPasswordRepeatTextInput
+        id: phoneNumberTextInput
         write_tab: False
         multiline: False
-        password: True
-        hint_text: 'Repeat Password'
+        hint_text: 'Phone Number'
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+    MyTextInput:
+        id: nationalCodeTextInput
+        write_tab: False
+        multiline: False
+        hint_text: 'National ID'
         size_hint: (0.3, 1)
         pos_hint: {'center_x':0.5}
     MyButton:
         markup: True
-        text: 'REGISTER'
+        text: 'CREATE ACCOUNT'
         size_hint: (0.3, 1)
         pos_hint: {'center_x':0.5}
-        on_release: root.signUpCallback()
+        on_release: root.createAccountCallback()
     MyButton:
         markup: True
         text: 'CANCEL'
         size_hint: (0.3, 1)
         pos_hint: {'center_x':0.5}
-        on_release: root.cancelSignUpCallback()
+        on_release: root.cancelCreateAccountCallback()
     BoxLayout:
         size_hint: (1,7)
