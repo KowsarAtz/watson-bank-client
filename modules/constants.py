@@ -8,6 +8,7 @@ ALL_ACCOUNTS_SCREEN = 'all_accounts'
 ALL_TRANSACTIONS_SCREEN = 'all_transactions'
 CREATE_TRANSACTION_SCREEN = 'create_transaction'
 CREATE_ACCOUNT_SCREEN = 'create_account'
+CHANGE_ACCOUNT_STATUS = 'change_account_status'
 
 LOGIN_SCREEN_KV = '../kv files/login_screen.kv'
 MENU_SCREEN_KV = '../kv files/menu_screen.kv'
@@ -18,6 +19,7 @@ CREATE_TRANSACTION_SCREEN_KV = '../kv files/create_transaction_screen.kv'
 CREATE_ACCOUNT_SCREEN_KV = '../kv files/create_account_screen.kv'
 MY_WIDGETS_KV = '../kv files/my_widgets.kv'
 SHOW_LOGS_POPUP_KV = '../kv files/show_logs_popup.kv'
+CHANGE_ACCOUNT_STATUS_KV = '../kv files/change_status_screen.kv'
 
 CHART_PATH = './assets/chart.png'
 

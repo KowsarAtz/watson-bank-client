@@ -1,0 +1,39 @@
+#:import C kivy.utils.get_color_from_hex
+<ChangeStatusScreen>:
+    canvas:
+        Color:
+            rgb: C("#232130") 
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    orientation: 'vertical'
+    spacing: '10'
+    BoxLayout:
+        size_hint: (1,7)
+    MyTextInput:
+        id: accountNumberTextInput
+        write_tab: False
+        multiline: False
+        hint_text: 'enter account number'
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+    MyButton:
+        markup: True
+        text: 'CLOSE ACCOUNT'
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+        on_release: root.closeAccountCallback()
+    MyButton:
+        markup: True
+        text: 'BLOCK ACCOUNT'
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+        on_release: root.blockAccountCallback()
+    MyButton:
+        markup: True
+        text: 'CANCEL'
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+        on_release: root.cancelCallback()
+    BoxLayout:
+        size_hint: (1,7)

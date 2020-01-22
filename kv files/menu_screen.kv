@@ -35,6 +35,13 @@
         on_release: root.getAllAccountsCallback()
 
     MyButton:
+        text: 'CHANGE ACCOUNT STATUS'
+        markup: True
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+        on_release: root.changeAccountStatusCallback()
+
+    MyButton:
         text: 'CREATE TRANSACTION'
         markup: True
         size_hint: (0.3, 1)

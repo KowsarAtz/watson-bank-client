@@ -25,9 +25,6 @@ def createAccount(token, firstName, lastName, phoneNumber, nationalCode):
     data = {'accountOwner': {'firstName': firstName, 'lastName': lastName,
                          'phoneNumber': phoneNumber, 'nationalCode': nationalCode}}
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    # if response.status_code == 201: #201: Success , 400: Duplicate National ID , 401: Invalid Token Perhaps
-    #     return response.json()
-    # return None
     return response.status_code
 
 def getAccountOwner(token, nationalCode):
@@ -74,13 +71,12 @@ def changeAccountStatus(token, accountNumber, newStatus):
     elif newStatus == CLOSED:
         url += 'accounts/CloseAccount'
     else:
-        return False #Invalid Status
+        return None
     data = {'accountNumber': accountNumber}
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 401: Invalid Token Perhaps, 404: Not Found
-        return True
-    return False
-    # also it will return 200 if the account has been blocked/closed already!, to be completed . . . 
+    if response.status_code == 200:
+        return response.json()
+    return None
 
 def getAllTransactions(token):
     url = BASE_URL + 'transaction/TransactionListCreate'

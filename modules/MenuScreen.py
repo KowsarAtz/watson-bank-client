@@ -28,3 +28,6 @@ class MenuScreen(BoxLayout):
     def createTransactionCallback(self):
         self.app.createTransactionScreenCallback()
         self.app.screenManager.current = CREATE_TRANSACTION_SCREEN
+    
+    def changeAccountStatusCallback(self):
+        self.app.screenManager.current = CHANGE_ACCOUNT_STATUS
