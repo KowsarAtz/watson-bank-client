@@ -8,18 +8,18 @@
         size_hint: (1,1)
 
     MyButton:
-        text: 'SHOW LAST 20'
+        text: 'SHOW LAST 15'
         markup: True
         size_hint: (0.7, 1)
         pos_hint: {'center_x':0.5}
-        # on_release: root.signUpClerkCallback()
+        on_release: root.showLastNLogsCallback(15)
 
     MyButton:
         text: 'SHOW LAST 10'
         markup: True
         size_hint: (0.7, 1)
         pos_hint: {'center_x':0.5}
-        # on_release: root.createAccountCallback()
+        on_release: root.showLastNLogsCallback(10)
 
     MyTextInput:
         id: customRangeTextInput
@@ -34,7 +34,7 @@
         markup: True
         size_hint: (0.7, 1)
         pos_hint: {'center_x':0.5}
-        # on_release: root.getAllAccountsCallback()
+        on_release: root.showRangeLogsCallback()
 
     BoxLayout:
         size_hint: (1, 1)

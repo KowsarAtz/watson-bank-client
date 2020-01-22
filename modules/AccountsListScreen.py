@@ -8,6 +8,7 @@ from Alert import Alert
 from math import ceil
 from kivy.core.window import Window
 from constants import *
+from os import system as runCommand
 
 class ShowLogsPopUp(BoxLayout):
     def __init__(self, logs, currentCredit, accountID, ownerName, **kwargs):
@@ -23,6 +24,51 @@ class ShowLogsPopUp(BoxLayout):
             'y': None
         }
         self.createLogsChart(logs, currentCredit)
+        self.ids.customRangeTextInput.hint_text = 'enter a subrange of 1-'+str(len(self.logs))
+
+    def showRangeLogsCallback(self):
+        temp = self.ids.customRangeTextInput.text.split('-')
+        args = None
+        try:
+            i = int(temp[0])
+            j = int(temp[1])
+            if (j-i+1) > 15:
+                raise Exception
+            if j>len(self.logs):
+                raise Exception
+            args = (self.bars['names'][i:j+1], self.bars['baseBar'][i:j+1],\
+                        self.bars['greenBar'][i:j+1], self.bars['redBar'][i:j+1],\
+                            self.bars['y'][i:j+1])
+            if len(args[0]) == 0:
+                raise Exception
+            
+        except Exception:
+            Alert(title="Input Error", text='Invalid Range! Try Again')
+            return
+
+        length = len(args[0])
+        argv = str(length)+' '
+        for item in args:
+            for n in item:
+                if type(n) == str:
+                    argv += ''.join(n.split()) + ' '
+                else:
+                    argv += str(n) + ' '
+        runCommand('python ./modules/turtles.py '+argv[:-1])
+
+    def showLastNLogsCallback(self, n):
+        args = (self.bars['names'][-n:], self.bars['baseBar'][-n:],\
+                    self.bars['greenBar'][-n:], self.bars['redBar'][-n:],\
+                        self.bars['y'][-n:])
+        length = len(args[0])
+        argv = str(length)+' '
+        for item in args:
+            for n in item:
+                if type(n) == str:
+                    argv += ''.join(n.split()) + ' '
+                else:
+                    argv += str(n) + ' '
+        runCommand('python ./modules/turtles.py '+argv[:-1])
 
     def createLogsChart(self, logs, currentCredit):
         all_ = logs[:]
