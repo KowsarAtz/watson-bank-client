@@ -60,7 +60,7 @@ def addAccount(token, nationalCode):
     url = BASE_URL + 'accounts/AddAccountToAccountOwner'
     data = {'nationalCode': nationalCode}
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 401: Invalid Token Perhaps
+    if response.status_code == 200:
         return response.json()
     return None
 

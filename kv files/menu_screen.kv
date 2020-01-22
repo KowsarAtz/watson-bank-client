@@ -28,6 +28,13 @@
         on_release: root.createAccountCallback()
 
     MyButton:
+        text: 'ADD ACCOUNT'
+        markup: True
+        size_hint: (0.3, 1)
+        pos_hint: {'center_x':0.5}
+        on_release: root.addAccountCallback()
+
+    MyButton:
         text: 'ACCOUNTS LIST'
         markup: True
         size_hint: (0.3, 1)

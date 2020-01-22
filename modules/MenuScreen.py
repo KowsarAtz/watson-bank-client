@@ -17,6 +17,9 @@ class MenuScreen(BoxLayout):
     def createAccountCallback(self):
         self.app.screenManager.current = CREATE_ACCOUNT_SCREEN
 
+    def addAccountCallback(self):
+        self.app.screenManager.current = ADD_ACCOUNT_SCREEN
+
     def getAllAccountsCallback(self):
         self.app.allAccountsScreenCallback()
         self.app.screenManager.current = ALL_ACCOUNTS_SCREEN
