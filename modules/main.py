@@ -1,8 +1,5 @@
 from constants import *
-
 from kivy.config import Config
-# Config.set('graphics', 'fullscreen', 'auto')
-
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.core.text import LabelBase

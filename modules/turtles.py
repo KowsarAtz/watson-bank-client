@@ -72,7 +72,6 @@ def showTurtleChart(names, baseBar, greenBar, redBar, y):
         if not baseBar[i] == 0:
             drawBar(turtle, barStartPositions[i], baseBar[i], BASE_BAR_COLOR, width)
     
-    #names 483,11:112020-01-22
     for i in range(len(names)):
         turtle.penup()
         turtle.goto((i+1)*border+width*(i+1/2),-1*border)

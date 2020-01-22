@@ -14,8 +14,6 @@ class CreateTransactionScreen(BoxLayout):
         self.transactionAmountTextInput = self.ids.transactionAmountTextInput
 
     def createTransactionCallback(self):
-        # correct it
-
         fromAccount = self.fromAccountTextInput.text.strip()
         toAccount = self.toAccountTextInput.text.strip()
         if len(fromAccount) == 0 and len(toAccount) == 0:

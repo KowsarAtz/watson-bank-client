@@ -1,6 +1,5 @@
 import requests
 
-# BASE_URL = 'http://localhost:8000/api/'
 BASE_URL = 'http://176.9.164.222:2211/api/'
 BLOCKED = 'B'
 OPEN = 'O'
@@ -10,7 +9,7 @@ def signUp(token, username, password):
     url = BASE_URL + 'accounts/User/SignUp'
     data = {'username': username,'password': password}
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})    
-    return response.status_code #201: Success , 400: Duplicate Username , 401: Invalid Token Perhaps
+    return response.status_code
 
 def getToken(username, password):
     url = BASE_URL + 'Login'
@@ -30,21 +29,21 @@ def createAccount(token, firstName, lastName, phoneNumber, nationalCode):
 def getAccountOwner(token, nationalCode):
     url = BASE_URL + 'accounts/AccountOwnerRetrieve/' + nationalCode
     response = requests.get(url, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 404: Not Found, 401: Invalid Token Perhaps
+    if response.status_code == 200: 
         return response.json()
     return None
 
 def getAccount(token, accountNumber):
     url = BASE_URL + 'accounts/BankAccountRetrieve/' + accountNumber
     response = requests.get(url, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 404: Not Found, 401: Invalid Token Perhaps
+    if response.status_code == 200: 
         return response.json()
     return None
 
 def getAllAccounts(token):
     url = BASE_URL + 'accounts/BankAccountListCreate'
     response = requests.get(url, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 401: Invalid Token Perhaps
+    if response.status_code == 200: 
         return response.json()
     return None
 
@@ -52,7 +51,7 @@ def getAccountLogs(token, accountNumber):
     url = BASE_URL + 'accounts/GetBankAccountLogs'
     data = {'accountNumber': accountNumber}
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 401: Invalid Token Perhaps
+    if response.status_code == 200:
         return response.json()
     return None
 
@@ -81,7 +80,7 @@ def changeAccountStatus(token, accountNumber, newStatus):
 def getAllTransactions(token):
     url = BASE_URL + 'transaction/TransactionListCreate'
     response = requests.get(url, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 200: #200: Success , 401: Invalid Token Perhaps
+    if response.status_code == 200: 
         return response.json()
     return None
 
@@ -98,7 +97,7 @@ def createTransaction(token, amount, fromAccount, toAccount, info = '', cash = F
         data['fromAccount'] = fromAccount
 
     response = requests.post(url, json=data, headers={'Authorization': 'JWT ' + token})
-    if response.status_code == 201: #201: Success , 400: sth not valid , 401: Invalid Token Perhaps
+    if response.status_code == 201: 
         return response.json()
     elif response.status_code == 400:
         msg = ''
