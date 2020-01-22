@@ -42,7 +42,7 @@ def showTurtleChart(names, baseBar, greenBar, redBar, y):
 
     
     maxheight = max(y+redBar)
-    border = ceil(maxheight/10)
+    border = max(ceil(maxheight/10), 10)
     numbars = len(y)
     width = border*5
     wn.setworldcoordinates(0-border,0-3*border,(border+width)*numbars+2*border,maxheight+2*border)
